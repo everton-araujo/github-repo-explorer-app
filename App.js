@@ -1,13 +1,12 @@
 import React from 'react';
-import { Text } from 'react-native';
 
-import Main from './src/pages/Main';
+import Repositories from './src/pages/Repositories';
 
 const App = () => {
   return (
-    <Main>
+    <Repositories>
 
-    </Main>
+    </Repositories>
   );
 }
 
