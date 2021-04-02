@@ -59,11 +59,14 @@ export const ButtonText = styled.Text`
 `;
 
 export const Repositories = styled.View`
-  flex-direction: row;
   padding: 20px;
   margin: 10px;
   border-width: 1px;
   height: 370px;
   width: 350px;
   border-radius: 6px;
+`;
+
+export const URLText = styled.TouchableOpacity`
+  
 `;
