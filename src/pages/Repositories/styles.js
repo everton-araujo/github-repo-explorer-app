@@ -5,6 +5,7 @@ const windowWidth = Dimensions.get('window').width;
 
 export const Container = styled.SafeAreaView`
   background: #63C2D1;
+  flex: 1;
 `;
 
 export const Header = styled.View`
@@ -27,6 +28,7 @@ export const UserAvatar = styled.Image`
 
 export const UserName = styled.Text`
   font-size: 16px;
+  font-weight: bold;
 `;
 
 export const Body = styled.View`
@@ -65,10 +67,10 @@ export const ButtonText = styled.Text`
 `;
 
 export const Repositories = styled.View`
-  padding: 20px;
+  padding: 15px;
   margin: 10px;
   border-width: 1px;
-  height: 370px;
+  height: 320px;
   width: 350px;
   border-radius: 6px;
   border-color: #D3D3D3;
@@ -79,6 +81,4 @@ export const LoadingIcon = styled.ActivityIndicator`
   margin-top: 50px;
 `;
 
-export const URLText = styled.TouchableOpacity`
-  
-`;
+export const URLText = styled.TouchableOpacity``;

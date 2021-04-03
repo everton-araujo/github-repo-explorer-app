@@ -11,7 +11,7 @@ const Preload = () => {
 
   useEffect(() => {
     setTimeout(()=>{
-      navigation.navigate('Repositories');
+      navigation.navigate('MainTab');
     }, 3000);
 
   }, []);

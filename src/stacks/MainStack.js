@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Preload from '../pages/Preload';
 import Repositories from '../pages/Repositories';
+import MainTab from './MainTab';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ const MainStack = () => {
     >
       <Stack.Screen name='Preload' component={Preload} />
       <Stack.Screen name='Repositories' component={Repositories} />
+      <Stack.Screen name='MainTab' component={MainTab} />
     </Stack.Navigator>
   );
 }

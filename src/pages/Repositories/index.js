@@ -50,7 +50,6 @@ const Main = () => {
     api.get(`/users/${inputText}/repos`).then((response) => {
       setRepositories(response.data);
 
-      console.log(response.data);
     }).catch(() => {
       alert('Usuário não encontrado!');
     }) ;
