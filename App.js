@@ -1,12 +1,13 @@
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 
-import Repositories from './src/pages/Repositories';
+import MainStack from './src/stacks/MainStack';
 
 const App = () => {
   return (
-    <Repositories>
-
-    </Repositories>
+    <NavigationContainer>
+      <MainStack />
+    </NavigationContainer>
   );
 }
 

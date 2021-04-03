@@ -6,6 +6,7 @@ import api from '../../services/api';
 import githubLogo from '../../assets/github-logo.png';
 
 import { 
+  Container,
   Header,
   Title,
   UserAvatar,
@@ -16,24 +17,37 @@ import {
   Button,
   ButtonText,
   Repositories,
+  LoadingIcon,
   URLText
 } from './styles';
 
 const Main = () => {
   const [inputText, setInputText] = useState('');
   const [repositories, setRepositories] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleEraseRepositories = () => {
     setRepositories([]);
   }
 
-  const handleGetRepositories = async () => {
+  const handleGetRepositories = () => {
     if (inputText.length == 0) {
       alert('Digite o nome de usuário');
       return;
     }
 
-    await api.get(`/users/${inputText}/repos`).then((response) => {
+    setLoading(true);
+    setRepositories([]);
+    
+    setTimeout(()=>{
+      getRepositories();
+    }, 3000);
+  }
+
+  function getRepositories() {
+    setLoading(false);
+
+    api.get(`/users/${inputText}/repos`).then((response) => {
       setRepositories(response.data);
 
       console.log(response.data);
@@ -58,7 +72,7 @@ const Main = () => {
   };
 
   return (
-    <>
+    <Container>
       <Header>
         <Title>Github Repository Explorer</Title>
         {
@@ -86,7 +100,7 @@ const Main = () => {
         <Input
           placeholder={'github-user-name'}
           onChangeText={(value) => setInputText(value)}
-        />
+        /> 
 
         <ButtonSection>
           <Button
@@ -104,6 +118,8 @@ const Main = () => {
 
         <Repositories>
           <ScrollView>
+            {loading == true && <LoadingIcon size='large' color='#000' />}
+
             {repositories?.map((repository) => (
               <View key={repository.id} style={{ flexDirection: 'row' }}>
                 <Text style={{ fontWeight: 'bold' }}>Repo: </Text>
@@ -116,7 +132,7 @@ const Main = () => {
           </ScrollView>
         </Repositories>
       </Body>
-    </>
+    </Container>
   );
 }
 

@@ -3,6 +3,10 @@ import { Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
+export const Container = styled.SafeAreaView`
+  background: #63C2D1;
+`;
+
 export const Header = styled.View`
   padding: 10px;
   align-items: center;
@@ -36,6 +40,7 @@ export const Input = styled.TextInput`
   height: 40px;
   text-align: center;
   border-color: #D3D3D3;
+  background-color: #FFF;
 `;
 
 export const ButtonSection = styled.View`
@@ -52,6 +57,7 @@ export const Button = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   border-color: #AAA;
+  background-color: #FFF;
 `;
 
 export const ButtonText = styled.Text`
@@ -65,6 +71,12 @@ export const Repositories = styled.View`
   height: 370px;
   width: 350px;
   border-radius: 6px;
+  border-color: #D3D3D3;
+  background-color: #FFF;
+`;
+
+export const LoadingIcon = styled.ActivityIndicator`
+  margin-top: 50px;
 `;
 
 export const URLText = styled.TouchableOpacity`
