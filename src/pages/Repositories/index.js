@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Text, View, ScrollView, Linking } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import api from '../../services/api';
 
@@ -22,6 +23,7 @@ import {
 } from './styles';
 
 const Main = () => {
+  const [searchHistory, setSearchHistory] = useState([]);
   const [inputText, setInputText] = useState('');
   const [repositories, setRepositories] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -46,15 +48,44 @@ const Main = () => {
 
   function getRepositories() {
     setLoading(false);
-
+    
     api.get(`/users/${inputText}/repos`).then((response) => {
       setRepositories(response.data);
+      setSearchHistory([...searchHistory, inputText]);
 
     }).catch(() => {
       alert('Usuário não encontrado!');
     }) ;
   }
-  
+
+  const saveSearchHistory = async () => {
+    try {
+      await AsyncStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  const loadSearchHistory = async () => {
+    try {
+      const history = await AsyncStorage.getItem('searchHistory');
+
+      if (history && JSON.parse(history).length) {
+        setSearchHistory(JSON.parse(history));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    loadSearchHistory();
+  }, []);
+
+  useEffect(() => {
+    saveSearchHistory();
+  }, [searchHistory]);
+
   const OpenRepositoryPage = ({url, children}) => {
     const handlePress = useCallback(async () => {
       const supported = await Linking.canOpenURL(url);

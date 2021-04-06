@@ -72,7 +72,7 @@ export const Repositories = styled.View`
   border-width: 1px;
   height: 320px;
   width: 350px;
-  border-radius: 6px;
+  border-radius: 8px;
   border-color: #D3D3D3;
   background-color: #FFF;
 `;
