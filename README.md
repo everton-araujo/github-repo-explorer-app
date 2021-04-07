@@ -1,12 +1,12 @@
 # Github Repository Explorer App
 
-Application create using React Native.
+Application created using React Native.
 
 <p align="center">
 <img src="./src/assets/github-explorer-app.gif" alt="Application demonstration" width="300" height="650"/>
 </p>
 
-App created to search all repositories from a github user.
+Application created to search all repositories from a github user.
 
 If the repository name is clicked, the application will redirect to github repository page.
 
