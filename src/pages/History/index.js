@@ -28,19 +28,13 @@ const History = () => {
     }
   }
 
-  const saveSearchHistory = async () => {
+  const saveEmptyHistory = () => {
     try {
       setSearchHistory([]);
-      console.log('SALVOU', searchHistory);
-      await AsyncStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+      AsyncStorage.setItem('searchHistory', JSON.stringify(['']));
     } catch (err) {
       console.error(err);
     }
-  }
-
-  const clearHistory = () => {
-    setSearchHistory([]);
-    saveSearchHistory();
   }
 
   useEffect(() => {
@@ -65,7 +59,7 @@ const History = () => {
 
       <ClearButton>
         <ClearButtonText
-          onPress={clearHistory}
+          onPress={saveEmptyHistory}
         >
           Clear History
         </ClearButtonText>

@@ -136,13 +136,13 @@ const Main = () => {
           <Button
             onPress={handleGetRepositories}
           >
-            <ButtonText>Pesquisar</ButtonText>
+            <ButtonText>Search</ButtonText>
           </Button>
           
           <Button
             onPress={handleEraseRepositories}
           >
-            <ButtonText>Limpar</ButtonText>
+            <ButtonText>Clean</ButtonText>
           </Button>
         </ButtonSection>
 
