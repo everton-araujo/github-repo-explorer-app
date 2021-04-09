@@ -25,9 +25,16 @@ export const ResultArea = styled.View`
   background-color: #FFF;
 `;
 
-export const Users = styled.View`
+export const Repos = styled.View`
+  margin-top: -10px;
   align-items: center;
-  margin-top: 10px;
+  margin-bottom: 20px;
+`;
+
+export const UserAvatar = styled.Image`
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
 `;
 
 export const User = styled.Text`
@@ -44,21 +51,22 @@ export const ClearButton = styled.TouchableOpacity`
   align-items: center;
   margin-left: 100px;
 `;
+
 export const RefreshButton = styled.TouchableOpacity`
-flex: 0.5;
-align-items: center;
-margin-right: 10px;
-margin-top: 6px;
+  flex: 0.5;
+  align-items: center;
+  margin-right: 10px;
+  margin-top: 6px;
 `;
 
 export const ClearButtonText = styled.Text`
-font-weight: bold;
-font-size: 16px;
-color: #FFF;
+  font-weight: bold;
+  font-size: 16px;
+  color: #FFF;
 `;
 
 export const RefreshIcon = styled.Image`
-width: 24px;
-height: 24px;
-tint-color: #FFF;
+  width: 24px;
+  height: 24px;
+  tint-color: #FFF;
 `;

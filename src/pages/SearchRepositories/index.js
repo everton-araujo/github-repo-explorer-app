@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../services/api';
 
 import githubLogo from '../../assets/github-logo.png';
+import heart from '../../assets/like.png';
 
 import { 
   Container,
@@ -19,11 +20,14 @@ import {
   ButtonText,
   Repositories,
   LoadingIcon,
-  URLText
+  URLText,
+  Favorite,
+  HeartIcon
 } from './styles';
 
 const Main = () => {
   const [searchHistory, setSearchHistory] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [inputText, setInputText] = useState('');
   const [repositories, setRepositories] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -58,6 +62,26 @@ const Main = () => {
     }) ;
   }
 
+  const saveFavorites = async () => {
+    try {
+      await AsyncStorage.setItem('favorites', JSON.stringify(favorites));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  const loadFavorites = async () => {
+    try {
+      const favorites = await AsyncStorage.getItem('favorites');
+
+      if (favorites && JSON.parse(favorites).length) {
+        setFavorites(JSON.parse(favorites));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   const saveSearchHistory = async () => {
     try {
       await AsyncStorage.setItem('searchHistory', JSON.stringify(searchHistory));
@@ -78,14 +102,6 @@ const Main = () => {
     }
   }
 
-  useEffect(() => {
-    loadSearchHistory();
-  }, []);
-
-  useEffect(() => {
-    saveSearchHistory();
-  }, [searchHistory]);
-
   const OpenRepositoryPage = ({url, children}) => {
     const handlePress = useCallback(async () => {
       const supported = await Linking.canOpenURL(url);
@@ -100,6 +116,26 @@ const Main = () => {
   
     return <URLText onPress={handlePress}><Text>{children}</Text></URLText>;
   };
+
+  const addFavorite = (repository) => {
+    const fullName = repository.full_name.split('/');
+    const avatar = repository.owner.avatar_url;
+
+    const userRepo = fullName[0] + '/' + fullName[1] + '|' + avatar;
+
+    setFavorites([...favorites, userRepo]);
+
+    saveFavorites();
+  }
+
+  useEffect(() => {
+    loadSearchHistory();
+    loadFavorites();
+  }, []);
+
+  useEffect(() => {
+    saveSearchHistory();
+  }, [searchHistory]);
 
   return (
     <Container>
@@ -157,6 +193,10 @@ const Main = () => {
                 <OpenRepositoryPage url={repository.html_url}>
                   <Text>{repository.name}</Text>
                 </OpenRepositoryPage>
+                
+                <Favorite onPress={() => {addFavorite(repository)}}>
+                  <HeartIcon source={heart} style={{ tintColor: '#D3D3D3' }} />
+                </Favorite>
               </View>
             ))}
           </ScrollView>

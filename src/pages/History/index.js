@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Text, ScrollView, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import refreshIcon from '../../assets/refresh.png';
 
 import { 
   Container,
@@ -8,8 +10,11 @@ import {
   ResultArea,
   Users,
   User,
+  ButtonArea,
   ClearButton,
-  ClearButtonText
+  ClearButtonText,
+  RefreshButton,
+  RefreshIcon
 } from './styles';
 
 const History = () => {
@@ -41,6 +46,10 @@ const History = () => {
     loadSearchHistory();
   }, []);
 
+  const refresh = () => {
+    loadSearchHistory();
+  }
+
   return (
     <Container>
       <Title>Search History</Title>
@@ -57,13 +66,21 @@ const History = () => {
         </ScrollView>
       </ResultArea>
 
-      <ClearButton>
-        <ClearButtonText
-          onPress={saveEmptyHistory}
-        >
-          Clear History
-        </ClearButtonText>
-      </ClearButton>
+      <ButtonArea>
+        <ClearButton>
+          <ClearButtonText
+            onPress={saveEmptyHistory}
+          >
+            Clear History
+          </ClearButtonText>
+        </ClearButton>
+
+        <RefreshButton onPress={refresh}>
+          <RefreshIcon 
+            source={refreshIcon}
+          />
+        </RefreshButton>
+      </ButtonArea>
     </Container>
   );
 }

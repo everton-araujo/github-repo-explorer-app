@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Preload from '../pages/Preload';
-import Repositories from '../pages/Repositories';
+import Repositories from '../pages/SearchRepositories';
 import MainTab from './MainTab';
 
 const Stack = createStackNavigator();

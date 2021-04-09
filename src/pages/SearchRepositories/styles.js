@@ -82,3 +82,14 @@ export const LoadingIcon = styled.ActivityIndicator`
 `;
 
 export const URLText = styled.TouchableOpacity``;
+
+export const Favorite = styled.TouchableOpacity`
+  
+`;
+
+export const HeartIcon = styled.Image`
+  height: 14px;
+  width: 14px;
+  margin-top: 4px;
+  margin-left: 6px;
+`;

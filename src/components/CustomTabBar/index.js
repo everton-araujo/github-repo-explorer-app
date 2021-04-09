@@ -1,10 +1,10 @@
 import React from 'react';
-import { Image } from 'react-native';
 
 import SearchIcon from '../../assets/search.png';
 import Favorite from '../../assets/like.png';
+import History from '../../assets/history.png';
 
-import { TabArea, TabItem, Icon } from './styles';
+import { TabArea, TabItem, TabItemCenter, Icon, CenterIcon } from './styles';
 
 
 const CustomTabBar = ({ state, navigation }) => {
@@ -14,17 +14,30 @@ const CustomTabBar = ({ state, navigation }) => {
 
   return (
     <TabArea>
-      <TabItem onPress={() => goTo('Repositories')}>
+      <TabItem onPress={() => goTo('Favorites')}>
         <Icon 
-          source={SearchIcon}
-          style={{ opacity: state.index === 0 ? 1 : 0.5 }}
+          source={Favorite}
+          style={{ opacity: state.index === 1 ? 1 : 0.5 }}
         />
       </TabItem>
 
+      <TabItemCenter 
+        style={{ 
+          backgroundColor: state.index === 0 ? '#CDF2F9' : '#FFF',
+          borderColor: state.index === 0 ? '#D3D3D3' : '#4EADBE',
+          // marginTop: state.index === 1 ? -20 : -10
+        }}
+        onPress={() => goTo('Repositories')}
+      >
+        <CenterIcon 
+          source={SearchIcon}
+        />
+      </TabItemCenter>
+
       <TabItem onPress={() => goTo('History')}>
-        <Icon 
-          source={Favorite} 
-          style={{ opacity: state.index === 1 ? 1 : 0.5 }} 
+        <Icon
+          source={History} 
+          style={{ opacity: state.index === 2 ? 1 : 0.5 }} 
         />
       </TabItem>
     </TabArea>
