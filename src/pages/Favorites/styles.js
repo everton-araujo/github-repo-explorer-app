@@ -26,9 +26,8 @@ export const ResultArea = styled.View`
 `;
 
 export const Repos = styled.View`
-  margin-top: -10px;
+  margin-top: 15px;
   align-items: center;
-  margin-bottom: 20px;
 `;
 
 export const UserAvatar = styled.Image`

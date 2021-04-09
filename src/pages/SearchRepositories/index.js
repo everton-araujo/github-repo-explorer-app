@@ -31,6 +31,7 @@ const Main = () => {
   const [inputText, setInputText] = useState('');
   const [repositories, setRepositories] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [colorHeart, setColorHeart] = useState([]);
 
   const handleEraseRepositories = () => {
     setRepositories([]);
@@ -70,6 +71,14 @@ const Main = () => {
     }
   }
 
+  const saveHearted = async () => {
+    try {
+      await AsyncStorage.setItem('hearted', JSON.stringify(colorHeart));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   const loadFavorites = async () => {
     try {
       const favorites = await AsyncStorage.getItem('favorites');
@@ -102,6 +111,18 @@ const Main = () => {
     }
   }
 
+  const loadHearted = async () => {
+    try {
+      const hearted = await AsyncStorage.getItem('hearted');
+
+      if (hearted && JSON.parse(hearted).length) {
+        setColorHeart(JSON.parse(hearted));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   const OpenRepositoryPage = ({url, children}) => {
     const handlePress = useCallback(async () => {
       const supported = await Linking.canOpenURL(url);
@@ -126,11 +147,15 @@ const Main = () => {
     setFavorites([...favorites, userRepo]);
 
     saveFavorites();
+    saveHearted();
+
+    setColorHeart([...colorHeart, fullName[1]]);
   }
 
   useEffect(() => {
     loadSearchHistory();
     loadFavorites();
+    loadHearted();
   }, []);
 
   useEffect(() => {
@@ -195,7 +220,21 @@ const Main = () => {
                 </OpenRepositoryPage>
                 
                 <Favorite onPress={() => {addFavorite(repository)}}>
-                  <HeartIcon source={heart} style={{ tintColor: '#D3D3D3' }} />
+                  {/* {
+                    colorHeart.map((item) => (
+                      item === repository.name
+                      ? 
+                      :
+                      // ? <HeartIcon source={heart} style={{ tintColor: '#F00' }} />
+                      // : <HeartIcon source={heart} style={{ tintColor: '#D3D3D3' }} />
+                    ))
+                  } */}
+                  {
+                    // repository.name.includes(colorHeart[3])
+                    colorHeart.some(r => repository.name.includes(r))
+                    ? <HeartIcon source={heart} style={{ tintColor: '#F00' }} />
+                    : <HeartIcon source={heart} style={{ tintColor: '#D3D3D3' }} />
+                  }
                 </Favorite>
               </View>
             ))}

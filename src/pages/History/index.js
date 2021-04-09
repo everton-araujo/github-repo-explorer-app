@@ -36,7 +36,7 @@ const History = () => {
   const saveEmptyHistory = () => {
     try {
       setSearchHistory([]);
-      AsyncStorage.setItem('searchHistory', JSON.stringify(['']));
+      AsyncStorage.setItem('searchHistory', JSON.stringify([]));
     } catch (err) {
       console.error(err);
     }

@@ -21,6 +21,7 @@ import {
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const favoritesUniq = [...new Set(favorites)];
+  const [hearted, setHearted] = useState([]);
   
   const OpenRepositoryPage = ({url, children}) => {
     const handlePress = useCallback(async () => {
@@ -52,10 +53,25 @@ const Favorites = () => {
     }
   }
 
+  const loadHearted = async () => {
+    try {
+      const hearted = await AsyncStorage.getItem('hearted');
+
+      if (hearted && JSON.parse(hearted).length) {
+        setHearted(JSON.parse(hearted));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   const saveEmptyFavorites = () => {
     try {
       setFavorites([]);
-      AsyncStorage.setItem('favorites', JSON.stringify(['']));
+      setHearted([]);
+
+      AsyncStorage.setItem('favorites', JSON.stringify([]));
+      AsyncStorage.setItem('hearted', JSON.stringify([]));
     } catch (err) {
       console.error(err);
     }
@@ -63,6 +79,7 @@ const Favorites = () => {
 
   useEffect(() => {
     loadFavorites();
+    loadHearted();
   }, []);
 
   const refresh = () => {
