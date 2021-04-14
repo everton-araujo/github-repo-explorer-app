@@ -54,7 +54,7 @@ const Main = () => {
   function getRepositories() {
     setLoading(false);
     
-    api.get(`/users/${inputText}/repos`).then((response) => {
+    api.get(`/users/${inputText}/repos?per_page=100`).then((response) => {
       setRepositories(response.data);
       setSearchHistory([...searchHistory, inputText]);
 
