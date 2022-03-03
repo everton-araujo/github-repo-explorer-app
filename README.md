@@ -1,5 +1,7 @@
 # Github Repository Explorer App
 
+#### [New app](https://github.com/everton-araujo/github-repo-explorer-v2) under construction using typescript.
+
 Application created using React Native.
 
 <p align="center">
